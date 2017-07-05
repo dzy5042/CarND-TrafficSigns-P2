@@ -18,12 +18,12 @@ The goals / steps of this project are the following:
 
 [image1]: ./examples/exp1.png "OriginalPlot"
 [image2]: ./examples/exp2.png "GrayscalingPlot"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./german traffic signs/30.jpg "Traffic Sign 1"
-[image5]: ./german traffic signs/construct.jpg "Traffic Sign 2"
-[image6]: ./german traffic signs/kindergarten.jpg "Traffic Sign 3"
-[image7]: ./german traffic signs/STOP.jpg "Traffic Sign 4"
-[image8]: ./german traffic signs/X.jpg "Traffic Sign 5"
+[image3]: ./examples/LabelDistribution.png "LabelDistribution"
+[image4]: ./examples/30.jpg "Traffic Sign 1"
+[image5]: ./examples/construct.jpg "Traffic Sign 2"
+[image6]: ./examples/kindergarten.jpg "Traffic Sign 3"
+[image7]: ./examples/STOP.jpg "Traffic Sign 4"
+[image8]: ./examples/X.jpg "Traffic Sign 5"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -49,6 +49,11 @@ Here is one traffic sign data in training set.
 
 ![120 speed limit sign][image1]
 
+Here is the plot of the number of images for every class
+
+![image plot][image3]
+
+Since the training sample is not evenly distributed among different classes, it can be expected the prediction accuracy will also be different among different class. 
 ###Design and Test a Model Architecture
 
 ####Data preprocess
@@ -56,7 +61,9 @@ Here is one traffic sign data in training set.
 I decided to normalize and grayscale the images because because this will eliminate some misleading information like color of the sign.
 
 Here is an example of a traffic sign image before and after grayscaling.
+
 ![before][image1]
+
 ![after][image2]
 
 
@@ -97,9 +104,26 @@ I start with the LeNet model as the starting point. I found 10 epoch is not enou
 
 Here are five German traffic signs that I found on the web:
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
 
+![alt text][image4]
+
+This is a 30 km/h speed limit sign. Although it got noise text on the sign, but since the color gradient change is not dramatic around that text, I will expect this sign got relatively high probability to get predicted.
+
+![alt text][image5] 
+
+This is a road-work sign, the sign is well-centered, with high color contrast. Although this sign has less training samples, I will expect this got nice prediction.
+
+![alt text][image6] 
+
+This is a children crossing sign. It might be affected by the noise text presented in image. However, since the main feature on the sign is still very clear, the prediction will still be relatively easy.
+
+![alt text][image7] 
+
+This is a stop sign, the sign is well-centered, with high color contrast, and this sign has a lot of training samples. I will expect this got nice prediction.
+
+![alt text][image8]
+
+This is a yield sign, this image does not start as a square. It may get distorted during pre-processing of image and may have bad prediction.
 
 
 Here are the results of the prediction:
